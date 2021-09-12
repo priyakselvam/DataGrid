@@ -1,0 +1,46 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  display: grid;
+}
+.mat-raised-button{
+  background-color: #673ab7;
+  color:#fafafa;
+  text-align: center;
+  padding: 0;
+  
+}
+.mat-input-element {
+text-align: left;
+}
+
+.mat-button{
+  background-color: #673ab7;
+  color:#fafafa;
+  text-align: center;
+  
+}
+
+mat-header-cell{
+  background-color:#dddddd;
+  display:flex;
+  justify-content:left;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.filter-input{
+  border-bottom: 2px solid darkgrey;
+}
+
+mat-cell{
+  display: grid;
+  display:flex;
+  justify-content:left;
+}
+

@@ -1,0 +1,12 @@
+<div>
+
+  <mat-table #table [dataSource]="dataSourceProduct">
+    <ng-container  [cdkColumnDef]="col" *ngFor="let col of displayedColumns">
+     <mat-header-cell *cdkHeaderCellDef> {{col}} </mat-header-cell>
+     <mat-cell *cdkCellDef="let row"> {{row[col]}} </mat-cell>
+   </ng-container>
+   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+ </mat-table>
+
+</div>

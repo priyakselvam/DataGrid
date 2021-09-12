@@ -1,0 +1,46 @@
+<div class="container">
+  <mat-card [ngClass]="{'custom-card':true}">
+      <ng-container >
+          &nbsp;
+          <button mat-raised-button *ngFor="let headerBtn of btnHdrList | keyvalue"  (click)='clickEvent(headerBtn, null, null)' > 
+          {{headerBtn.value}}
+          </button> &nbsp;
+        </ng-container>
+      <mat-paginator #paginator [length]=length [pageIndex]=pageIndex [pageSize]=pageSize  [pageSizeOptions]="[25, 50,100,250,500]" 
+      (page)="pageEvent = handlePage($event)"></mat-paginator>
+    <mat-table #table class="mat-elevation-z8" [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+      <ng-container  [cdkColumnDef]="col" *ngFor="let col of totalColumns">
+       <mat-header-cell *cdkHeaderCellDef mat-sort-header [disabled]="isSortingDisabled(col)">
+          <div *ngIf=isSelectHeader(col)>
+          <mat-checkbox id="mainSelect" (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </div>
+          <span  *ngIf="!displayFilter(col) && !isSelectHeader(col)">{{col | titlecase}} </span> 
+          <div class="header" *ngIf=displayFilter(col) >
+              <span>
+                <input id="Search{{col}}" class="filter-input" matInput (keyup)="applyFilter(col)" [placeholder]='col | titlecase' [maxLength]="255"/>
+              </span>
+            </div>
+       </mat-header-cell>
+       <mat-cell *cdkCellDef="let row"> 
+          <ng-container *ngFor="let btn of buttonList | keyvalue">
+              <button mat-raised-button *ngIf='col == btn.value'  (click)='clickEvent(btn, row, null)' > 
+              {{btn.value}}
+              </button>
+            </ng-container>
+         {{row[col]}} 
+          <mat-checkbox name={{row[col]}}   (click)="clicked(row);$event.stopPropagation()"
+                             (change)="$event ? selection.toggle(row) : null"
+                             [checked]="selection.isSelected(row)" *ngIf='col == "select"'>	
+          </mat-checkbox>
+       </mat-cell>
+     </ng-container>
+     <mat-header-row *matHeaderRowDef="totalColumns"></mat-header-row>
+     <mat-row *matRowDef="let row; columns: totalColumns;"></mat-row>
+   </mat-table>
+  
+   <mat-paginator #paginator [length]=length [pageIndex]=pageIndex [pageSize]=pageSize  [pageSizeOptions]="[25, 50,100,250,500]" 
+            (page)="pageEvent = handlePage($event)"></mat-paginator>
+  </mat-card>
+  </div>

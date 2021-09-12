@@ -1,0 +1,10 @@
+<div>
+
+  <button (click)='toggleProduct()'>{{buttonProduct}}</button>
+
+  <button (click)='toggleCity()'>{{buttonCity}}</button>
+
+  <app-product (dataSource)='dataSource' *ngIf="showProduct"></app-product>
+
+  <app-product *ngIf="showCity" da></app-product>
+</div>
